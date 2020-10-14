@@ -1,10 +1,11 @@
 import React from "react";
 import classNames from "classnames";
+import { NavLink } from "react-router-dom";
 
 const Button = (props) => {
   return (
-    <a
-      href="/cart.html"
+    <NavLink
+      to="/cart"
       className={classNames("button", { "button--cart": props.outline })}
       
     >
@@ -40,7 +41,7 @@ const Button = (props) => {
         />
       </svg>
       <span>3</span>
-    </a>
+    </NavLink>
   );
 };
 
