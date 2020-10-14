@@ -12,11 +12,9 @@ const activeLabel = popupList[activeItem]
 
   useEffect(() => {
     document.body.addEventListener("click", (event) => {
-      console.dir(event);
-      console.log(event);
       if (event.path.includes(sortRef.current)) {
-        console.log("work");
-    // return   
+
+    return   
     } else {
         setVisiblePopup(false);
     }
