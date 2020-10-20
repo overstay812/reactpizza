@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes, { string } from "prop-types";
+import { connect } from "react-redux";
 
 const PizzaBlock = ({
   name,
@@ -10,12 +11,12 @@ const PizzaBlock = ({
   category,
   rating,
   price,
+
 }) => {
   const availableTypes = ["тонкое", "традиционное"];
   const availableSizes = [26, 30, 40];
   const [activeType, setActiveType] = useState(types[0]);
   const [activeSize, setActiveSize] = useState(sizes[0]);
-  console.log(name, types);
 
   return (
     <div className="pizza-block">
@@ -91,4 +92,6 @@ PizzaBlock.defaultProps = {
   types: [],
   sizes: [],
 };
-export default PizzaBlock;
+
+
+export default connect()(PizzaBlock);

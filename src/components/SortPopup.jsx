@@ -1,30 +1,38 @@
 import React, { useEffect, useRef, useState } from "react";
+import { connect } from "react-redux";
+import { setSortBy } from "../redux/actions/filtersActions";
 
-const SortPopup = ({popupList}) => {
+
+const popupList = [
+  { name: "популярности", type: "popular" },
+  { name: "цене", type: "price" },
+  { name: "алфавиту", type: "name" },
+];
+
+const SortPopup = ({ setSortBy }) => {
+  
   const [visiblePopup, setVisiblePopup] = useState(false);
-
-
   const [activeItem, setActiveItem] = useState(0);
 
   let sortRef = useRef(null);
-const activeLabel = popupList[activeItem] 
 
+  const activeLabel = popupList[activeItem].name;
 
   useEffect(() => {
     document.body.addEventListener("click", (event) => {
       if (event.path.includes(sortRef.current)) {
-
-    return   
-    } else {
+        return;
+      } else {
         setVisiblePopup(false);
-    }
+      }
     });
   }, []);
 
   return (
     <div className="sort" ref={sortRef}>
       <div className="sort__label">
-        <svg className={visiblePopup? 'rotated' : ''}
+        <svg
+          className={visiblePopup ? "rotated" : ""}
           width="10"
           height="6"
           viewBox="0 0 10 6"
@@ -47,12 +55,14 @@ const activeLabel = popupList[activeItem]
             {popupList.map((item, index) => (
               <li
                 className={activeItem === index ? "active" : ""}
+                key={item.type}
                 onClick={() => {
                   setActiveItem(index);
+                  setSortBy(item.type);
                   setVisiblePopup(false);
                 }}
               >
-                {item}
+                {item.name}
               </li>
             ))}
           </ul>
@@ -62,4 +72,8 @@ const activeLabel = popupList[activeItem]
   );
 };
 
-export default SortPopup;
+const mapDispatchToProps = {
+  setSortBy,
+};
+
+export default connect(null, mapDispatchToProps)(SortPopup);
